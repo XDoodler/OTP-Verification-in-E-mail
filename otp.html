@@ -4,7 +4,7 @@
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box}
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text], input[type=number],input[type=email] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -14,7 +14,7 @@ input[type=text], input[type=password] {
 }
 
 /* Add a background color when the inputs get focus */
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=email]:focus, input[type=number]:focus {
     background-color: #ddd;
     outline: none;
 }
@@ -79,7 +79,7 @@ hr {
     border: 1px solid #f1f1f1;
     margin-bottom: 25px;
 }
- 
+
 /* The Close Button (x) */
 .close {
     position: absolute;
@@ -110,6 +110,11 @@ hr {
     }
 }
 </style>
+
+
+
+
+
 <body>
 
 <h2>Modal Signup Form</h2>
@@ -118,20 +123,21 @@ hr {
 
 <div id="id01" class="modal">
   <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-  <form class="modal-content" action="otp.php" method="post">
+  <form id="logInForm" name="registration" class="modal-content" action="otp.php" method="post">
     <div class="container">
       <h1>Sign Up</h1>
       <p>Please fill in this form to create an account.</p>
+
       <hr>
       <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" required>
+      <input id="email" type="email" placeholder="Enter Email" name="email" required>
 
       <label for="psw"><b>Name</b></label>
-      <input type="text" placeholder="Enter Name" name="name" required>
+      <input id="name" type="text" placeholder="Enter Name" name="name" required>
 
       <label for="psw-repeat"><b>Contact</b></label>
-      <input type="text" placeholder="Repeat Contact" name="con" required>
-      
+      <input id="contact" type="number" placeholder="Repeat Contact" name="con" required>
+
       <label>
         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
       </label>
@@ -147,6 +153,43 @@ hr {
 </div>
 
 <script>
+
+function validate(e){
+	var email = document.getElementById("email").value;
+	var name = document.getElementById("name").value;
+  var contact = document.getElementById("contact").value;
+
+	if (email.length === 0) {
+		alert("You must enter a email id.");
+		e.preventDefault();
+		return;
+	}
+
+	if (name.length === 0) {
+		alert("You must enter a name.");
+		e.preventDefault();
+		return;
+	}
+  if (contact.length === 0) {
+		alert("You must enter a contact.");
+		e.preventDefault();
+		return;
+	}
+  if (contact.length != 10) {
+    alert("You must enter a valid contact number.");
+    e.preventDefault();
+    return;
+  }
+}
+
+window.onload = function() {
+	document.getElementById("logInForm").addEventListener("submit", function(e){
+    	validate(e);
+	});
+}
+
+
+
 // Get the modal
 var modal = document.getElementById('id01');
 
@@ -158,6 +201,6 @@ window.onclick = function(event) {
 }
 </script>
 
+
 </body>
 </html>
-

@@ -1,23 +1,45 @@
 <?php
- 
- 
+
+$msg = "";
 if($_SERVER['REQUEST_METHOD']=='POST')
 {
 	if(isset($_POST['submit']))
 	{
-        $name=$_POST['name'];
-        $email=$_POST['email'];
-        $contact=$_POST['con'];
-        
-        $pos=strpos($email,"@");
-       
+
+    $con = new mysqli('localhost','root','mypass','usersdb');
+
+
+    $name = $con->real_escape_string($_POST['name']);
+    $email = $con->real_escape_string($_POST['email']);
+    $contact = $con->real_escape_string($_POST['con']);
+
+
+				$con->query("INSERT INTO users (name,email,contact)
+					VALUES ('$name', '$email', '$contact');
+				");
+
+
+
+
+
+
+
+
+    // $password = $con->real_escape_string($_POST['password']);
+
+        // $name=$_POST['name'];
+        // $email=$_POST['email'];
+        // $contact=$_POST['con'];
+        //
+        // $pos=strpos($email,"@");
+
         $cookieid=substr($email,0,$pos); //store the email userid
-      
+
         $otp=rand(1000,9999); //generate an OTP
-       
+
 
        if(!isset($_COOKIE["uid"])){ //if cookie is set, then...
-           
+
            session_id("otp");session_start(); //start sessiom=n
 
         setcookie("uid",$cookieid); // set cookie uid to store Userid from email
@@ -36,15 +58,15 @@ if($_SERVER['REQUEST_METHOD']=='POST')
         header('Location: check.html');
           }
      }
-    
+
        }
 
-       
-        
-    
 
 
-   
+
+
+
+
 
 
 
