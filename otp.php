@@ -31,7 +31,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
         // $email=$_POST['email'];
         // $contact=$_POST['con'];
         //
-        // $pos=strpos($email,"@");
+         $pos=strpos($email,"@");
 
         $cookieid=substr($email,0,$pos); //store the email userid
 
