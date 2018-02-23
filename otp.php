@@ -31,7 +31,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
           $to = $email;
         $subject = "SUBJECT";
         $txt = "VERIFICATION OTP: ".$_COOKIE[$cookieid]."   Valid for 10 minutes." ;
-        $headers = "From: otp@yourdomain.com" ;
+        $headers = "From: subject@yourdomain.com" ;
         mail($to,$subject,$txt,$headers);
         header('Location: check.html');
           }
