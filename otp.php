@@ -1,6 +1,6 @@
 <?php
  $mailp;
- 
+ $id=""; $pos; $cookieid;
 if($_SERVER['REQUEST_METHOD']=='POST')
 {
 	if(isset($_POST['submit']))
@@ -10,8 +10,12 @@ if($_SERVER['REQUEST_METHOD']=='POST')
         $contact=$_POST['con'];
         
         $pos=strpos($email,"@");
+        
+        if(strpos($email,'.')!=-1) {$pos1=strpos($email,".");  $cookieid=substr($email,0,$pos1);}
        
-        $cookieid=substr($email,0,$pos);
+       else{$cookieid=substr($email,0,$pos);}
+           
+       
       
         $otp=rand(1000,9999);
        
